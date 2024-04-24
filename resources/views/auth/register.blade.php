@@ -66,6 +66,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <button type="button" class="btn btn-secondary" onclick="location.href='{{ route('login') }}';">{{ __('Cancel') }}</button>
+
                             </div>
                         </div>
                     </form>
