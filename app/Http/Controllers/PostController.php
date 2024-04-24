@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +22,9 @@ public function store(Request $request)
 
     $post = new Post();
     $post->content = $request->input('content');
-    
+
+    $post->user_id = Auth::id();
+
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $imageName = time().'.'.$image->extension();
