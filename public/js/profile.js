@@ -1,4 +1,3 @@
-
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -64,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -381,7 +380,7 @@
     /* WEBPACK VAR INJECTION */(function(process) {
     
     var utils = __webpack_require__(0);
-    var normalizeHeaderName = __webpack_require__(27);
+    var normalizeHeaderName = __webpack_require__(25);
     
     var PROTECTION_PREFIX = /^\)\]\}',?\n/;
     var DEFAULT_CONTENT_TYPE = {
@@ -10895,12 +10894,12 @@
     /* WEBPACK VAR INJECTION */(function(process) {
     
     var utils = __webpack_require__(0);
-    var settle = __webpack_require__(19);
-    var buildURL = __webpack_require__(22);
-    var parseHeaders = __webpack_require__(28);
-    var isURLSameOrigin = __webpack_require__(26);
+    var settle = __webpack_require__(17);
+    var buildURL = __webpack_require__(20);
+    var parseHeaders = __webpack_require__(26);
+    var isURLSameOrigin = __webpack_require__(24);
     var createError = __webpack_require__(7);
-    var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(21);
+    var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(19);
     
     module.exports = function xhrAdapter(config) {
       return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -10996,7 +10995,7 @@
         // This is only done if running in a standard browser environment.
         // Specifically not if we're in a web worker, or react-native.
         if (utils.isStandardBrowserEnv()) {
-          var cookies = __webpack_require__(24);
+          var cookies = __webpack_require__(22);
     
           // Add xsrf header
           var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -11117,7 +11116,7 @@
     "use strict";
     
     
-    var enhanceError = __webpack_require__(18);
+    var enhanceError = __webpack_require__(16);
     
     /**
      * Create an Error with the specified message, config, error code, and response.
@@ -11183,76 +11182,10 @@
     /* 10 */
     /***/ (function(module, exports, __webpack_require__) {
     
-    
-    /**
-     * First we will load all of this project's JavaScript dependencies which
-     * includes Vue and other libraries. It is a great starting point when
-     * building robust, powerful web applications using Vue and Laravel.
-     */
-    
-    __webpack_require__(30);
-    
-    /**
-     * Next, we will create a fresh Vue application instance and attach it to
-     * the page. Then, you may begin adding components to this application
-     * or customize the JavaScript scaffolding to fit your unique needs.
-     */
-    
-    var app = new Vue({
-      el: '#app',
-      data: {
-        msg: 'Update New Post:',
-        content: '',
-        posts: []
-    
-      },
-    
-      ready: function ready() {
-        this.created();
-      },
-    
-      created: function created() {
-        var _this = this;
-    
-        axios.get('http://localhost/larabook/index.php/posts').then(function (response) {
-          console.log(response); // show if success
-          _this.posts = response.data; //we are putting data into our posts array
-        }).catch(function (error) {
-          console.log(error); // run if we have error
-        });
-      },
-    
-    
-      methods: {
-        addPost: function addPost() {
-    
-          //alert('test function');
-          axios.post('http://localhost/larabook/index.php/addPost', {
-            content: this.content
-          }).then(function (response) {
-            console.log('saved successfully'); // show if success
-          }).catch(function (error) {
-            console.log(error); // run if we have error
-          });
-        }
-      }
-    
-    });
+    module.exports = __webpack_require__(11);
     
     /***/ }),
     /* 11 */
-    /***/ (function(module, exports) {
-    
-    // removed by extract-text-webpack-plugin
-    
-    /***/ }),
-    /* 12 */
-    /***/ (function(module, exports, __webpack_require__) {
-    
-    module.exports = __webpack_require__(13);
-    
-    /***/ }),
-    /* 13 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11260,7 +11193,7 @@
     
     var utils = __webpack_require__(0);
     var bind = __webpack_require__(8);
-    var Axios = __webpack_require__(15);
+    var Axios = __webpack_require__(13);
     var defaults = __webpack_require__(1);
     
     /**
@@ -11295,14 +11228,14 @@
     
     // Expose Cancel & CancelToken
     axios.Cancel = __webpack_require__(5);
-    axios.CancelToken = __webpack_require__(14);
+    axios.CancelToken = __webpack_require__(12);
     axios.isCancel = __webpack_require__(6);
     
     // Expose all/spread
     axios.all = function all(promises) {
       return Promise.all(promises);
     };
-    axios.spread = __webpack_require__(29);
+    axios.spread = __webpack_require__(27);
     
     module.exports = axios;
     
@@ -11311,7 +11244,7 @@
     
     
     /***/ }),
-    /* 14 */
+    /* 12 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11375,7 +11308,7 @@
     
     
     /***/ }),
-    /* 15 */
+    /* 13 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11383,10 +11316,10 @@
     
     var defaults = __webpack_require__(1);
     var utils = __webpack_require__(0);
-    var InterceptorManager = __webpack_require__(16);
-    var dispatchRequest = __webpack_require__(17);
-    var isAbsoluteURL = __webpack_require__(25);
-    var combineURLs = __webpack_require__(23);
+    var InterceptorManager = __webpack_require__(14);
+    var dispatchRequest = __webpack_require__(15);
+    var isAbsoluteURL = __webpack_require__(23);
+    var combineURLs = __webpack_require__(21);
     
     /**
      * Create a new instance of Axios
@@ -11467,7 +11400,7 @@
     
     
     /***/ }),
-    /* 16 */
+    /* 14 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11526,14 +11459,14 @@
     
     
     /***/ }),
-    /* 17 */
+    /* 15 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
     
     
     var utils = __webpack_require__(0);
-    var transformData = __webpack_require__(20);
+    var transformData = __webpack_require__(18);
     var isCancel = __webpack_require__(6);
     var defaults = __webpack_require__(1);
     
@@ -11612,7 +11545,7 @@
     
     
     /***/ }),
-    /* 18 */
+    /* 16 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11638,7 +11571,7 @@
     
     
     /***/ }),
-    /* 19 */
+    /* 17 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11670,7 +11603,7 @@
     
     
     /***/ }),
-    /* 20 */
+    /* 18 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11697,7 +11630,7 @@
     
     
     /***/ }),
-    /* 21 */
+    /* 19 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11740,7 +11673,7 @@
     
     
     /***/ }),
-    /* 22 */
+    /* 20 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11815,7 +11748,7 @@
     
     
     /***/ }),
-    /* 23 */
+    /* 21 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11834,7 +11767,7 @@
     
     
     /***/ }),
-    /* 24 */
+    /* 22 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11894,7 +11827,7 @@
     
     
     /***/ }),
-    /* 25 */
+    /* 23 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11915,7 +11848,7 @@
     
     
     /***/ }),
-    /* 26 */
+    /* 24 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -11990,7 +11923,7 @@
     
     
     /***/ }),
-    /* 27 */
+    /* 25 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -12009,7 +11942,7 @@
     
     
     /***/ }),
-    /* 28 */
+    /* 26 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -12053,7 +11986,7 @@
     
     
     /***/ }),
-    /* 29 */
+    /* 27 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -12087,11 +12020,11 @@
     
     
     /***/ }),
-    /* 30 */
+    /* 28 */
     /***/ (function(module, exports, __webpack_require__) {
     
     /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {
-    window._ = __webpack_require__(32);
+    window._ = __webpack_require__(30);
     
     /**
      * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12101,7 +12034,7 @@
     
     window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
     
-    __webpack_require__(31);
+    __webpack_require__(29);
     
     /**
      * Vue is a modern JavaScript library for building interactive web interfaces
@@ -12109,7 +12042,7 @@
      * and simple, leaving you to focus on building your next great project.
      */
     
-    window.Vue = __webpack_require__(33);
+    window.Vue = __webpack_require__(31);
     
     /**
      * We'll load the axios HTTP library which allows us to easily issue requests
@@ -12117,7 +12050,7 @@
      * CSRF token as a header based on the value of the "XSRF" token cookie.
      */
     
-    window.axios = __webpack_require__(12);
+    window.axios = __webpack_require__(10);
     
     window.axios.defaults.headers.common = {
       //'X-CSRF-TOKEN': window.Laravel.csrfToken,
@@ -12139,7 +12072,7 @@
     /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
     
     /***/ }),
-    /* 31 */
+    /* 29 */
     /***/ (function(module, exports, __webpack_require__) {
     
     /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -14523,7 +14456,7 @@
     /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
     
     /***/ }),
-    /* 32 */
+    /* 30 */
     /***/ (function(module, exports, __webpack_require__) {
     
     /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31612,10 +31545,10 @@
       }
     }.call(this));
     
-    /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(34)(module)))
+    /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(32)(module)))
     
     /***/ }),
-    /* 33 */
+    /* 31 */
     /***/ (function(module, exports, __webpack_require__) {
     
     "use strict";
@@ -40943,7 +40876,7 @@
     /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(9)))
     
     /***/ }),
-    /* 34 */
+    /* 32 */
     /***/ (function(module, exports) {
     
     module.exports = function(module) {
@@ -40971,13 +40904,47 @@
     
     
     /***/ }),
-    /* 35 */
+    /* 33 */,
+    /* 34 */
     /***/ (function(module, exports, __webpack_require__) {
     
-    __webpack_require__(10);
-    module.exports = __webpack_require__(11);
+    __webpack_require__(28);
+    
+    var app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'i am from new:',
+        content: '',
+        privsteMsgs: []
+    
+      },
+    
+      ready: function ready() {
+        this.created();
+      },
+    
+      created: function created() {
+        axios.get('http://localhost/larabook/index.php/getMessages').then(function (response) {
+          console.log(response.data); // show if success
+          app.privsteMsgs = response.data; //we are putting data into our posts array
+        }).catch(function (error) {
+          console.log(error); // run if we have error
+        });
+      },
+    
+    
+      methods: {}
+    
+    });
+    
+    /***/ }),
+    /* 35 */,
+    /* 36 */,
+    /* 37 */
+    /***/ (function(module, exports, __webpack_require__) {
+    
+    module.exports = __webpack_require__(34);
     
     
     /***/ })
     /******/ ]);
-    

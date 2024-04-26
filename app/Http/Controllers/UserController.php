@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +18,13 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // Validate form data
+        if($request['gender']=='male'){
+            $pic_data='boy.png';
+        }
+        else
+        {
+            $pic_data='girl.png';
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -28,8 +35,15 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->gender=$request->gender;
+        $user->pic=$pic_data;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        $profile=new Profile();
+        $profile->user_id=$user->id;
+        $profile->about="I am a new user";
+        $profile->save();
 
         // Redirect the user after registration
         return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
