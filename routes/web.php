@@ -7,10 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 
 
-Route::group(['middleware'=>'auth'],function(){
-    Route::get('/', function () {    return view('welcome');});
-    Route::get('profile',[ProfileController::class,'showProfile'])->name('profile');
-});
+// Route::group(['middleware'=>'auth'],function(){
+// });
+Route::get('profile',[ProfileController::class,'showProfile'])->name('profile');
 Route::get('/', function () {    return view('welcome');});
 Route::get('register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [UserController::class, 'register']);
@@ -22,3 +21,4 @@ Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('aut
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/profile/edit',[ProfileController::class,'editProfile'])->name('profile.edit');

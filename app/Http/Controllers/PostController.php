@@ -36,4 +36,7 @@ public function store(Request $request)
 
     return redirect()->route('posts.create')->with('success', 'Post created successfully');
 }
+public function showPosts(){
+    
+}
 }

@@ -47,7 +47,7 @@
                 
                     <ul class="nav navbar-nav">
                            @if (Auth::check())
-                        <li><a href="{{url('profile')}}/{{ Auth::user()->slug }}">Profile</a></li>
+                        <li><a href="{{url('profile/edit')}}/{{ Auth::user()->slug }}">Profile</a></li>
                       
                          @endif
                     </ul>
