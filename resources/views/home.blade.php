@@ -29,15 +29,16 @@
                     </div>
                     <div class="interaction">
                         <a href="#" class="like">Like</a> |
-                        <a href="#" class="dislike">Dislike</a>
+                        <a href="#" class="dislike">Dislike</a> |
                         @if(Auth::user()==$post->user)
-                        <a href="#" class="edit">Edit</a>
+                        <a href="#" class="edit">Edit</a> |
                         <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="delete">Delete</a> 
                         @endif
                     </div>
                 </article>
             @endforeach
-            <div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+       </section>  
+       <div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -60,5 +61,4 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
         </div>
-    </section>  
 @endsection
