@@ -15,28 +15,34 @@ class PostController extends Controller
 
 public function store(Request $request)
 {
-    // $request->validate([
-    //     'content' => 'required',
-    //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
-    // ]);
+    $request->validate([
+        'body' => 'required|max:1000',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
 
     $post = new Post();
     $post->content = $request['body'];
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('images'), $imageName);
+        $post->image = $imageName;
+    }
+    $message="There was an error";
+    if($request->user()->posts()->save($post)){
+        $message="Post successfully created !";
+    }
 
-    $post->user_id = 6;
-
-    // if ($request->hasFile('image')) {
-    //     $image = $request->file('image');
-    //     $imageName = time().'.'.$image->extension();
-    //     $image->move(public_path('images'), $imageName);
-    //     $post->image = $imageName;
-    // }
-
-    $post->save();
-
-    return redirect()->route('posts.create')->with('success', 'Post created successfully');
+    return redirect()->route('home')->with(['message'=>$message]);
 }
-public function showPosts(){
+
+public function getDeletePost($post_id){
+    $post=Post::where('id',$post_id)->first();
+    if(Auth::user()!=$post->user){
+        return redirect()->back();
+    }
+    $post->delete();
+    return redirect()->route('home')->with(['message'=>'Successfully deleted!']);
 
 }
 }

@@ -4,12 +4,16 @@
     <section class="row new-post">
         <div class="col-md-6 col-md-offset-3">
             <header><h3>What do you have to say?</h3></header>
-            <form  method="post" action="{{ route('posts.store') }}">
+            <form  method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                 <div class="form-group">
                     <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Create Post</button>
-                <input type="hidden" value="{{ Session::token() }}" name="_token">
+                <div class="form-group">
+
+                <input type="file" class="form-control-file" id="image" name="image">
+                </div>
+                <button type="sbmit" class="btn btn-primary">Create Post</button>
+                <input type="hidden" value="{{ csrf_token() }}" name="_token">
             </form>
         </div>
     </section>
