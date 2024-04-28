@@ -23,3 +23,5 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/profile/edit',[ProfileController::class,'editProfile'])->name('profile.edit');
 Route::get('/delete-post/{post_id}',[PostController::class, 'getDeletePost'])->name('post.delete')->middleware('auth');
+Route::post('/edit',[PostController::class,'postEdit'])->name('edit');
+Route::post('/like',[PostController::class,'likePost'])->name('like');

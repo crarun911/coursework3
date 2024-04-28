@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    
     use HasFactory;
     protected $fillable=['content','user_id'];
     public function user(){
@@ -15,9 +16,9 @@ class Post extends Model
     // public function comments(){
     //     return $this->belongsTo(Comment::class);
     // }
-    // public function likes(){
-    //     return $this->belongsToMany(User::class,'post_likes')->withTimestamps();
-    // }
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
     // public function views(){
     //     return $this->belongsTo(PostView::class);
     // }
