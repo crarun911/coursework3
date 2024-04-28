@@ -15,28 +15,28 @@ class PostController extends Controller
 
 public function store(Request $request)
 {
-    $request->validate([
-        'content' => 'required',
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
-    ]);
+    // $request->validate([
+    //     'content' => 'required',
+    //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+    // ]);
 
     $post = new Post();
-    $post->content = $request->input('content');
+    $post->content = $request['body'];
 
-    $post->user_id = Auth::id();
+    $post->user_id = 6;
 
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('images'), $imageName);
-        $post->image = $imageName;
-    }
+    // if ($request->hasFile('image')) {
+    //     $image = $request->file('image');
+    //     $imageName = time().'.'.$image->extension();
+    //     $image->move(public_path('images'), $imageName);
+    //     $post->image = $imageName;
+    // }
 
     $post->save();
 
     return redirect()->route('posts.create')->with('success', 'Post created successfully');
 }
 public function showPosts(){
-    
+
 }
 }

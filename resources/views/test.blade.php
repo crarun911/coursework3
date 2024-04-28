@@ -1,16 +1,58 @@
-<div v-if="!image" style="position:relative;display:inline-block">
-                 <div style="border:1px solid #ddd; border-radius:10px;
-                 background-color:#efefef; padding:3 15 3 10; margin-bottom:10px">
-                 <i class="fa fa-file-image-o"></i> <b>photo</b>
-                  <input type="file" @change="onFileChange" style="position:absolute;
-                  left:0;top:0; opacity:0"/>
-                  </div>
-                  </div>
+@extends('layouts.app')
 
-                  <div v-else>
+@section('content')
+    <section class="row new-post">
+        <div class="col-md-6 col-md-offset-3">
+            <header><h3>What do you have to say?</h3></header>
+            <form  method="post" action="{{ route('posts.store') }}">
+                <div class="form-group">
+                    <textarea class="form-control" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Post</button>
+                <input type="hidden" value="{{ Session::token() }}" name="_token">
+            </form>
+        </div>
+    </section>
+    <section class="row posts">
+        <div class="col-md-6 col-md-offset-3">
+            <header><h3>What other people say...</h3></header>
+                <article class="post" data-postid="">
+                    <p></p>
+                    <div class="info">
+                    </div>
+                    <div class="interaction">
+                        <a href="#" class="like"></a> |
+                        <a href="#" class="like"></a>
+                      
+                            <a href="#" class="edit">Edit</a> |
+                            <a href="">Delete</a>
+                    </div>
+                </article>
+        </div>
+    </section>
 
-                <div class="upload_wrap">
-                    <textarea v-model="content" id="postText" class="form-control"
-                    placeholder="what's on your mind ?"></textarea>
-                      <b @click="removeImg" style="right:0;position:absolute;cursor:pointer">Cancel</b>
-                  <img :src="image" style="width:100px; margin:10px;"/><br>
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Post</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="post-body">Edit the Post</label>
+                            <textarea class="form-control" name="post-body" id="post-body" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+  
+@endsection

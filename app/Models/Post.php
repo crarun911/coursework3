@@ -9,16 +9,16 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable=['content','user_id'];
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-    public function comments(){
-        return $this->belongsTo(Comment::class);
-    }
-    public function likes(){
-        return $this->belongsToMany(User::class,'post_likes')->withTimestamps();
-    }
-    public function views(){
-        return $this->belongsTo(PostView::class);
-    }
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
+    // public function comments(){
+    //     return $this->belongsTo(Comment::class);
+    // }
+    // public function likes(){
+    //     return $this->belongsToMany(User::class,'post_likes')->withTimestamps();
+    // }
+    // public function views(){
+    //     return $this->belongsTo(PostView::class);
+    // }
 }
