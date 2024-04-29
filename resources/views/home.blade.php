@@ -23,38 +23,37 @@
         <div class="col-md-6 col-md-offset-3">
             <header><h3>Recent Posts...</h3></header>
             @foreach($posts as $post)
-    <article class="post" data-postid="{{$post->id}}">
-        <p><h5>{{$post->body}}</h5></p>
-        @if($post->image)
-            <img src="{{ asset('images/'.$post->image) }}" class="img-responsive" alt="Post Image">
-        @endif
-        <div class="info">
-            posted by <a href="{{ route('user.posts', ['user' => $post->user]) }}">{{$post->user->name}}</a> on {{$post->created_at}}
-        </div>
-        <div class="interaction">
-            <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> 
-            @if(Auth::user()==$post->user)
-                |<a href="#" class="edit">Edit</a> |
-                <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="delete">Delete</a>
-            @endif
-        </div>
-        <div class="comment-section">
-            <ul class="comments">
-                @if($post->comments)
-                    @foreach($post->comments as $comment)
-                        <li>{{ $comment->body }}</li>
-                    @endforeach
-                @endif
-            </ul>
-            <form class="comment-form" action="{{ route('comment.store', ['post' => $post]) }}" method="post">
-                <input type="text" name="body" placeholder="Add a comment">
-                <button type="submit">Comment</button>
-                @csrf
-            </form>
-        </div>
-    </article>
-    <hr>
-@endforeach
+                <article class="post" data-postid="{{$post->id}}">
+                    <p><h5>{{$post->body}}</h5></p>
+                    @if($post->image)
+                        <img src="{{ asset('images/'.$post->image) }}" class="img-responsive" alt="Post Image">
+                    @endif
+                    <div class="info">
+                        posted by <a href="{{ route('user.posts', ['user' => $post->user]) }}">{{$post->user->name}}</a> on {{$post->created_at}}
+                    </div>
+                    <div class="interaction">
+                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
+                        @if(Auth::user()==$post->user)
+                            <a href="#" class="edit">Edit</a> |
+                            <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="delete">Delete</a> 
+                        @endif
+                    </div>
+                    <div class="comment-section">
+                        <ul class="comments">
+                            @foreach($post->comments as $comment)
+                                <li>{{ $comment->body }}</li>
+                            @endforeach
+                        </ul>
+                        <form class="comment-form" action="{{ route('comment.store', ['post' => $post]) }}" method="post">
+                            <input type="text" name="body" placeholder="Add a comment">
+                            <button type="submit">Comment</button>
+                            @csrf
+                        </form>
+                    </div>
+                </article>
+                <hr>
+            @endforeach
+            {{$posts->links('pagination::bootstrap-4')}}
        </div>  
     </section>
     @endif

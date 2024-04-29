@@ -36,10 +36,11 @@
                     </button>
 
                     <!-- Branding Image -->
+                    @if(Auth::user()!=null)
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                       Home
                     </a>
-                    
+                    @endif
                     
                 </div>
 
@@ -48,7 +49,7 @@
                 
                     <ul class="nav navbar-nav">
                            @if (Auth::check())
-                        <li><a href="{{url('profile/edit')}}/{{ Auth::user()->slug }}">Profile</a></li>
+                        <li><a href="{{route('profile')}}">Profile</a></li>
                       
                          @endif
                     </ul>
@@ -62,7 +63,7 @@
                         @else
                         
                         <li> <a href="">
-                                <img src="{{url('../')}}/public/img/{{Auth::user()->pic}}" width="30px" height="30px" class="img-circle"/>
+                                <img src="{{ asset('images/'.Auth::user()->pic) }}" width="30px" height="30px" class="img-circle"/>
                                </a>  
                         </li>
                         

@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 
 
 Route::group(['middleware'=>'auth'],function(){
@@ -26,5 +27,6 @@ Route::get('/delete-post/{post_id}',[PostController::class, 'getDeletePost'])->n
 Route::post('/edit',[PostController::class,'postEdit'])->name('edit');
 Route::post('/like',[PostController::class,'likePost'])->name('like');
 Route::get('/user/{user}/posts', [PostController::class,'userPosts'])->name('user.posts');
-Route::post('/posts/{post}/comment',[CommentController::class,'store'])->name('comment.store');
+Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::post('/update',[ProfileController::class,'updateProfile'])->name('update');
 

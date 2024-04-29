@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->get(); 
+        $posts = Post::paginate(2); 
         return view('home',['posts'=>$posts]);
     }
 }
