@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -87,4 +88,10 @@ public function likePost(Request $request)
         }
         return null;
     }   
+
+    public function userPosts(User $user)
+{
+    $posts = $user->posts()->orderBy('created_at', 'desc')->get();
+    return view('posts.show-user-posts', compact('posts', 'user'));
+}
 }

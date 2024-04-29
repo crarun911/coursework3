@@ -25,3 +25,6 @@ Route::get('/profile/edit',[ProfileController::class,'editProfile'])->name('prof
 Route::get('/delete-post/{post_id}',[PostController::class, 'getDeletePost'])->name('post.delete')->middleware('auth');
 Route::post('/edit',[PostController::class,'postEdit'])->name('edit');
 Route::post('/like',[PostController::class,'likePost'])->name('like');
+Route::get('/user/{user}/posts', [PostController::class,'userPosts'])->name('user.posts');
+Route::post('/posts/{post}/comment',[CommentController::class,'store'])->name('comment.store');
+

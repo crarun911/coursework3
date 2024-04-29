@@ -42,4 +42,25 @@ $('.like').on('click', function(event) {
             }
         });
 });
-    
+
+$('.comment-form').submit(function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var formData = form.serialize();
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        success: function(response) {
+            // Append the new comment to the comments list
+            form.closest('.post').find('.comments').append('<li>' + response.comment.body + '</li>');
+            // Clear the input field
+            form.find('input[name=body]').val('');
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+});
