@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ForgetPasswordManager;
+use App\Http\Controllers\GoogleAuthController;
 
 
 Route::group(['middleware'=>'auth'],function(){
@@ -29,4 +31,7 @@ Route::post('/like',[PostController::class,'likePost'])->name('like');
 Route::get('/user/{user}/posts', [PostController::class,'userPosts'])->name('user.posts');
 Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/update',[ProfileController::class,'updateProfile'])->name('update');
-
+Route::get('/forget-password',[ForgetPasswordManager::class,'forgetPassword'])->name('forget.password');
+Route::post('/forget-password',[ForgetPasswordManager::class,'forgetPasswordPost'])->name('forget.password.post');
+Route::get('auth/{provider}',[GoogleAuthController::class,'redirect'])->name('google-auth');
+Route::get('auth/{provider}/call-back',[GoogleAuthController::class,'callbackGoogle']);
