@@ -50,6 +50,7 @@
                     <ul class="nav navbar-nav">
                            @if (Auth::check())
                         <li><a href="{{route('profile')}}">Profile</a></li>
+                        <li><a href="{{route('call.notify')}}">Notification</a></li>
                       
                          @endif
                     </ul>

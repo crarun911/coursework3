@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForgetPasswordManager;
 use App\Http\Controllers\GoogleAuthController;
-
+use App\Http\Controllers\ViewController;
 Route::group(['middleware'=>'auth'],function(){
 
 });
@@ -33,6 +33,6 @@ Route::get('/forget-password',[ForgetPasswordManager::class,'forgetPassword'])->
 Route::post('/forget-password',[ForgetPasswordManager::class,'forgetPasswordPost'])->name('forget.password.post');
 Route::get('auth/{provider}',[GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('auth/{provider}/call-back',[GoogleAuthController::class,'callbackGoogle']);
-Route::get('/notify',[HomeController::class,'notify']);
-Route::get('/markasread/{id}',[HomeController::class,'markasread'])->name('markasread');
-
+Route::get('/notify/{id}',[ViewController::class,'notify'])->name('notify');
+Route::get('/markasread/{id}',[ViewController::class,'markasread'])->name('markasread');
+Route::get('/notify',[ViewController::class,'viewNotification'])->name('call.notify');

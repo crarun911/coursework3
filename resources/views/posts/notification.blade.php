@@ -9,11 +9,16 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                     @csrf
-                       @foreach(auth()->user()->notifications as $notification)
-                       <div class="bg-blue-300 p3 m-2">
-                        {{$notification->data['name']}} started following you
-                       </div>
-                        @endforeach
+                    @foreach(auth()->user()->unreadnotifications as $notification)
+    <div class="bg-blue-300 p3 m-2">
+        @if(isset($notification->data['name']))
+            {{ $notification->data['name'] }} has sent a a friend request
+            <a href="{{route('markasread',$notification->id)}}">Accept</a>
+        @else
+            Notification data is missing 'name' key
+        @endif
+    </div>
+@endforeach
                        
                     </form>
                 </div>
