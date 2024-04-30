@@ -9,17 +9,15 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForgetPasswordManager;
 use App\Http\Controllers\GoogleAuthController;
 
-
 Route::group(['middleware'=>'auth'],function(){
+
 });
 Route::get('profile',[ProfileController::class,'showProfile'])->name('profile');
-// Route::get('/', function () {    return view('welcome');});
 Route::get('register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [UserController::class, 'register']);
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('login', [UserController::class, 'authenticate']);
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
@@ -35,3 +33,6 @@ Route::get('/forget-password',[ForgetPasswordManager::class,'forgetPassword'])->
 Route::post('/forget-password',[ForgetPasswordManager::class,'forgetPasswordPost'])->name('forget.password.post');
 Route::get('auth/{provider}',[GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('auth/{provider}/call-back',[GoogleAuthController::class,'callbackGoogle']);
+Route::get('/notify',[HomeController::class,'notify']);
+Route::get('/markasread/{id}',[HomeController::class,'markasread'])->name('markasread');
+

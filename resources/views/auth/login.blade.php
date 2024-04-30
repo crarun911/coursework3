@@ -18,7 +18,6 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -32,16 +32,18 @@
                         posted by <a href="{{ route('user.posts', ['user' => $post->user]) }}">{{$post->user->name}}</a> on {{$post->created_at}}
                     </div>
                     <div class="interaction">
-                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
+                        <a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> 
                         @if(Auth::user()==$post->user)
-                            <a href="#" class="edit">Edit</a> |
+                          |  <a href="#" class="edit">Edit</a> |
                             <a href="{{route('post.delete',['post_id'=>$post->id])}}" class="delete">Delete</a> 
                         @endif
                     </div>
                     <div class="comment-section">
                         <ul class="comments">
                             @foreach($post->comments as $comment)
-                                <li>{{ $comment->body }}</li>
+                                @if($comment->content!=null)
+                                <li>{{ $comment->content}}</li>
+                                @endif
                             @endforeach
                         </ul>
                         <form class="comment-form" action="{{ route('comment.store', ['post' => $post]) }}" method="post">
@@ -57,7 +59,16 @@
        </div>  
     </section>
     @endif
-
+    @foreach(auth()->user()->unreadnotifications as $notification)
+    <div class="bg-blue-300 p3 m-2">
+        @if(isset($notification->data['name']))
+            {{ $notification->data['name'] }} started following you
+            <a href="{{route('markasread',$notification->id)}}">Mark as read</a>
+        @else
+            Notification data is missing 'name' key
+        @endif
+    </div>
+@endforeach
     <div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
         <div class="modal-dialog">
             <div class="modal-content">
