@@ -7002,3 +7002,7 @@ button.close {
     display: none !important;
   }
 }
+.comment {
+  margin-top: 10px; /* Adjust as needed */
+  margin-bottom: 10px; /* Adjust as needed */
+}

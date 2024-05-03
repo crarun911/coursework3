@@ -36,3 +36,6 @@ Route::get('auth/{provider}/call-back',[GoogleAuthController::class,'callbackGoo
 Route::get('/notify/{id}',[ViewController::class,'notify'])->name('notify');
 Route::get('/markasread/{id}',[ViewController::class,'markasread'])->name('markasread');
 Route::get('/notify',[ViewController::class,'viewNotification'])->name('call.notify');
+Route::get('/comments/{comment}/edit', [CommentController::class,'edit'])->name('comment.edit');
+Route::put('/comments/{comment}',[CommentController::class,'update'])->name('comment.update');
+Route::delete('/comments/{comment}',[CommentController::class,'destroy'])->name('comment.delete');

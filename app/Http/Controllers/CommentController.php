@@ -16,6 +16,7 @@ class CommentController extends Controller
         $comment->content = $request->body; 
         $comment->user_id = auth()->user()->id;
         $comment->post_id = $post->id;
+        $comment->pic=auth()->user()->pic;
         $comment->save();
 
         return response()->json(['comment' => $comment]);

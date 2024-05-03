@@ -9,26 +9,34 @@ use Illuminate\Support\Facades\Auth;
 
 class GoogleAuthController extends Controller
 {
-    public function redirect() {
-        return Socialite::driver('google')->redirect();
+    protected $socialite;
+
+    public function __construct(Socialite $socialite)
+    {
+        $this->socialite = $socialite;
     }
+
+    public function redirect() {
+        return $this->socialite::driver('google')->redirect();
+    }
+
     public function callbackGoogle(){
-        $google_user=Socialite::driver('google')->user();
-        $user=User::where('google_id',$google_user->getid())->first();
+        $google_user = $this->socialite::driver('google')->user();
+        $user = User::where('google_id', $google_user->getId())->first();
+        
         if(!$user){
-            $new_user=User::create([
-                'name'=> $google_user->getname(),
-                'email'=>$google_user->getEmail(),
-                'pic'=>'boy.png',
-                'google_id'=>$google_user->getId()
+            $new_user = User::create([
+                'name' => $google_user->getName(),
+                'email' => $google_user->getEmail(),
+                'pic' => 'boy.png',
+                'google_id' => $google_user->getId()
             ]);
+            
             Auth::login($new_user);
-            return redirect()->intended('profile');
         }else{
             Auth::login($user);
-            return redirect()->intended('profile');
-
         }
-    }
 
+        return redirect()->intended('profile');
+    }
 }

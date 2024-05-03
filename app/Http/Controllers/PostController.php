@@ -5,38 +5,48 @@ use App\Models\Post;
 use App\Models\Like;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    protected $post;
+    protected $like;
+    protected $user;
+
+    public function __construct(Post $post, Like $like, User $user)
+    {
+        $this->post = $post;
+        $this->like = $like;
+        $this->user = $user;
+    }
+
     public function create()
-{
-    return view('posts.create');
-}
-
-public function store(Request $request)
-{
-    $request->validate([
-        'body' => 'required|max:1000',
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
-    ]);
-
-    $post = new Post();
-    $post->body = $request['body'];
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('images'), $imageName);
-        $post->image = $imageName;
-    }
-    $message="There was an error";
-    if($request->user()->posts()->save($post)){
-        $message="Post successfully created !";
+    {
+        return view('posts.create');
     }
 
-    return redirect()->route('home')->with(['message'=>$message]);
-}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'body' => 'required|max:1000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        $post = new $this->post;
+        $post->body = $request['body'];
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('images'), $imageName);
+            $post->image = $imageName;
+        }
+        $message="There was an error";
+        if($request->user()->posts()->save($post)){
+            $message="Post successfully created !";
+        }
+
+        return redirect()->route('home')->with(['message'=>$message]);
+    }
 
 public function getDeletePost($post_id){
     $post=Post::where('id',$post_id)->first();

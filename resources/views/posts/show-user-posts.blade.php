@@ -6,9 +6,11 @@
     <section class="row">
         <div class="col-md-6 col-md-offset-3">
             <header>
+
                 <h3>Posts by {{$user->name}}</h3>
-                <a href="{{route('notify',Auth::user()->id)}}">Follow</a>
-                
+                @if(Auth::user()!=$user->name) 
+                 <a href="{{route('notify',Auth::user()->id)}}">Follow</a>
+                @endif
             </header>
             @if($posts)
     <section class="row posts">
