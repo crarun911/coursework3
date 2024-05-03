@@ -71,14 +71,12 @@ class UserController extends Controller
         ]);
     }
 
-    // Attempt to authenticate the user using email and password
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
 
         return redirect()->intended('/'); // Redirect to the intended destination after login
     }
 
-    // If authentication fails, return back with an error message
     return back()->withErrors([
         'email' => 'The provided credentials do not match our records.',
     ]);

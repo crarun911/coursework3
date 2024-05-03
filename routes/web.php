@@ -10,6 +10,7 @@ use App\Http\Controllers\ForgetPasswordManager;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ViewController;
 Route::group(['middleware'=>'auth'],function(){
+ 
 
 });
 Route::get('profile',[ProfileController::class,'showProfile'])->name('profile');
@@ -17,8 +18,8 @@ Route::get('register', [UserController::class, 'showRegistrationForm'])->name('r
 Route::post('register', [UserController::class, 'register']);
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('login', [UserController::class, 'authenticate']);
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
